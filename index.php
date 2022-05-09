@@ -2,8 +2,8 @@
 include_once __DIR__ . "/classes/Products.php";
 include_once __DIR__ . "/classes/User.php";
 
-$claudio = new User("claudio", "pippo85", "2563254UF451", true, true, "gatto", null);
-var_dump($claudio);
+$claudio = new User("claudio", "pippo85", "2563254UF451", true, true, "gatto", false);
+/* var_dump($claudio); */
 
 ?>
 
@@ -20,7 +20,7 @@ var_dump($claudio);
 <body>
     <main>
 
-        <?php echo $claudio->getUserName(); ?>
+        <?php echo $claudio->getUserName() . $claudio->getDiscount() ?>
     </main>
 </body>
 

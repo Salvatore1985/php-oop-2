@@ -59,6 +59,9 @@ class User
 
    public function getDiscount()
    {
+      if ($this->getRegistration() == true) {
+         return $this->discount == true;
+      }
 
       return $this->discount;
    }
