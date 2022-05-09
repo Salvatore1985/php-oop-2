@@ -1,8 +1,9 @@
 <?php
-
+include_once __DIR__ . "/User.php";
 
 class Products
 {
+    protected $price;
     protected $food;
     protected $shampoo;
     protected $leash;
@@ -11,8 +12,9 @@ class Products
     protected $hairComb;
 
 
-    function __construct($food, $shampoo, $leash, $bed, $games, $hairComb)
+    function __construct($price, $food = null, $shampoo = null, $leash = null, $bed = null, $games = null, $hairComb = null)
     {
+        $this->price = $price;
         $this->food = $food;
         $this->shampoo = $shampoo;
         $this->leash = $leash;
@@ -44,5 +46,13 @@ class Products
     public function getGames()
     {
         return $this->hairComb;
+    }
+
+    public function getPrice()
+    {
+        if ($this->getIsRegistration() == true) {
+            return $this->price * 0.8;
+        }
+        return $this->price;
     }
 }

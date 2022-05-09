@@ -2,7 +2,7 @@
 <?php
 include_once __DIR__ . "/Products.php";
 
-class User
+class User extends Products
 {
    protected $userName;
    protected $passWord;
@@ -20,9 +20,16 @@ class User
       bool $registration,
       bool $isRegistration,
       $animalType,
-      $discount = null
+      $discount = null,
+      $price,
+      $food = null,
+      $shampoo = null,
+      $leash = null,
+      $bed = null,
+      $games = null,
+      $hairComb = null
    ) {
-
+      parent::__construct($price, $food = null, $shampoo = null, $leash = null, $bed = null, $games = null, $hairComb = null);
       $this->userName = $userName;
       $this->passWord = $passWord;
       $this->numCard = $numCard;
