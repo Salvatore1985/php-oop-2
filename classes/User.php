@@ -13,7 +13,7 @@ class User
    protected $discount;
 
 
-   function __contruct(
+   function __construct(
       $userName,
       $passWord,
       $numCard,

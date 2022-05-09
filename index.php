@@ -19,6 +19,7 @@ var_dump($claudio);
 
 <body>
     <main>
+
         <?php echo $claudio->getUserName(); ?>
     </main>
 </body>
