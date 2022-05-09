@@ -1,23 +1,35 @@
+
 <?php
+include_once __DIR__ . "/Products.php";
+
 class User
 {
    protected $userName;
    protected $passWord;
    protected $numCard;
    protected $registration;
-   protected $discount;
+   protected $isRegistration;
    protected $animalType;
+   protected $discount;
 
 
-   function __contruct($userName, $passWord, $numCard, $registration, $discount, $animalType)
-   {
+   function __contruct(
+      $userName,
+      $passWord,
+      $numCard,
+      bool $registration,
+      bool $isRegistration,
+      $animalType,
+      $discount = null
+   ) {
 
       $this->userName = $userName;
       $this->passWord = $passWord;
       $this->numCard = $numCard;
       $this->registration = $registration;
-      $this->discount = $discount;
+      $this->isRegistration = $isRegistration;
       $this->animalType = $animalType;
+      $this->discount = $discount;
    }
 
    public function getUserName()
@@ -40,8 +52,14 @@ class User
       return $this->registration;
    }
 
+   public function getIsRegistration()
+   {
+      return $this->isRegistration;
+   }
+
    public function getDiscount()
    {
+
       return $this->discount;
    }
 
