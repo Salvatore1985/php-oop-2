@@ -4,18 +4,18 @@ class User
    protected $userName;
    protected $passWord;
    protected $numCard;
-   protected $numShopping;
+   protected $registration;
    protected $discount;
    protected $animalType;
 
 
-   function __contruct($userName, $passWord, $numCard, $numShopping, $discount, $animalType)
+   function __contruct($userName, $passWord, $numCard, $registration, $discount, $animalType)
    {
 
       $this->userName = $userName;
       $this->passWord = $passWord;
       $this->numCard = $numCard;
-      $this->numShopping = $numShopping;
+      $this->registration = $registration;
       $this->discount = $discount;
       $this->animalType = $animalType;
    }
@@ -35,9 +35,9 @@ class User
       return $this->numCard;
    }
 
-   public function getNumShopping()
+   public function getRegistration()
    {
-      return $this->numShopping;
+      return $this->registration;
    }
 
    public function getDiscount()
