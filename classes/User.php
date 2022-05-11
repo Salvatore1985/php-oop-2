@@ -1,80 +1,95 @@
-
 <?php
-include_once __DIR__ . "/Products.php";
+include_once  __DIR__ . '/CreditCard.php';
 
 class User extends Products
 {
-   protected $userName;
-   protected $passWord;
-   protected $numCard;
-   protected $registration;
-   protected $isRegistration;
-   protected $animalType;
-   protected $discount;
+   public $name;
+   public $last_name;
+   public $age;
+   public $credit_card;
+   public $is_registered;
+   public $discount;
 
 
-   function __construct(
-      $userName,
-      $passWord,
-      $numCard,
-      bool $registration,
-      bool $isRegistration,
-      $animalType,
-      $discount = null,
-      $price,
-      $food = null,
-      $shampoo = null,
-      $leash = null,
-      $bed = null,
-      $games = null,
-      $hairComb = null
-   ) {
-      parent::__construct($price, $food = null, $shampoo = null, $leash = null, $bed = null, $games = null, $hairComb = null);
-      $this->userName = $userName;
-      $this->passWord = $passWord;
-      $this->numCard = $numCard;
-      $this->registration = $registration;
-      $this->isRegistration = $isRegistration;
-      $this->animalType = $animalType;
-      $this->discount = $discount;
-   }
-
-   public function getUserName()
+   public function __construct($name, $last_name, $age, $credit_card, $is_registered)
    {
-      return $this->userName;
-   }
-
-   public function getPassWord()
-   {
-      return $this->passWord;
-   }
-
-   public function getNunCard()
-   {
-      return $this->numCard;
-   }
-
-   public function getRegistration()
-   {
-      return $this->registration;
-   }
-
-   public function getIsRegistration()
-   {
-      return $this->isRegistration;
+      $this->name = $name;
+      $this->last_name = $last_name;
+      $this->age = $age;
+      $this->setCreditCard($credit_card);
+      $this->is_registered = $is_registered;
+      $this->discount = $this->setDiscount();
    }
 
    public function getDiscount()
    {
-      if ($this->getRegistration() == true) {
-         return $this->discount == true;
-      }
+      return 'Hai il ' . $this->discount . '% di sconto';
+   }
 
+   public function setDiscount()
+   {
+      if ($this->is_registered) {
+         $this->discount = 20;
+      } else {
+         $this->discount = 0;
+      }
       return $this->discount;
    }
 
-   public function getAnimalType()
+   public function setCreditCard($credit_card)
    {
-      return $this->animalType;
+      if (!$credit_card instanceof CreditCard) return false;
+      $this->credit_card = $credit_card;
+   }
+
+   public function getName()
+   {
+      return $this->name;
+   }
+
+   public function getLastName()
+   {
+      return $this->last_name;
+   }
+
+   public function getAge()
+   {
+      return $this->age;
+   }
+
+   public function getCreditCard()
+   {
+      return $this->credit_card;
+   }
+
+   public function getIsRegistered()
+   {
+      return $this->is_registered;
+   }
+   public function getBalance()
+   {
+      return $this->credit_card->balance . '€';
+   }
+
+
+   public function buyProduct($product)
+   {
+      if ($this->credit_card->expire < date('Y'))
+         return 'Carta di credito scaduta.';
+
+      if ($this->getBalance() < $product->price)
+         return 'Credito insufficiente';
+
+
+      if ($this->discount > 0) {
+         $price = $product->price - $product->price / 100 * $this->discount;
+         $this->credit_card->balance -= $price;
+
+         return "Transazione approvata, hai ricevuto uno sconto del $this->discount% e hai speso " . round($price, 2) . "€";
+      } else {
+         $this->credit_card->balance -= $product->price;
+
+         return "Transazione approvata, non hai ricevuto nessuno sconto e hai speso " . round($product->price, 2) . "€";
+      }
    }
 }

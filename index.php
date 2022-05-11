@@ -1,31 +1,15 @@
 <?php
-include_once __DIR__ . "/classes/Products.php";
-include_once __DIR__ . "/classes/User.php";
+include_once  __DIR__ . '/classes/Food.php';
+include_once  __DIR__ . '/classes/Customer.php';
 
-$claudio = new User("claudio", "pippo85", "2563254UF451", true, true, "gatto", false, 50);
-/* var_dump($claudio); */
-$franco = new User("franco", "ciccio98", "25252515JNKJ6", true, true, "cane", true, 100);
+$croccantini = new Food('croccantini', 10.0, "Croccantini per cani", "carne, miele, riso");
+$bocconcini = new Food('bocconcini', 30.0, "Bocconcini di carne", "carne");
 
-var_dump($franco)
-?>
+$card = new CreditCard(502502003002225, 2045, 50.00);
+$customer = new User("Luigi", "Micco", 53, $card, true);
+echo $customer->buyProduct($croccantini);
 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>php-oop-2</title>
-</head>
-
-<body>
-    <main>
-        <h1>e la prima registrazione: <?php echo $franco->getIsRegistration() ?></h1>
-        <h1>prezzo scontato <?php echo $franco->getPrice() ?></h1>
-        <!-- <h1> <?php echo $franco  ?></h1> -->
-        <?php echo $claudio->getUserName() . $claudio->getDiscount() ?>
-    </main>
-</body>
-
-</html>
+$card->setBalance(200);
+echo $customer->buyProduct($bocconcini);
+echo "<br>";
+echo "Disponibilità: " . $customer->getBalance();

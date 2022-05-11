@@ -1,58 +1,43 @@
 <?php
-include_once __DIR__ . "/User.php";
-
 class Products
 {
-    protected $price;
-    protected $food;
-    protected $shampoo;
-    protected $leash;
-    protected $bed;
-    protected $games;
-    protected $hairComb;
+    public $name;
+    public $price;
+    public $description;
 
-
-    function __construct($price, $food = null, $shampoo = null, $leash = null, $bed = null, $games = null, $hairComb = null)
+    public function __construct($name, $price, $description)
     {
+        $this->name = $name;
         $this->price = $price;
-        $this->food = $food;
-        $this->shampoo = $shampoo;
-        $this->leash = $leash;
-        $this->bed = $bed;
-        $this->games = $games;
-        $this->hairComb = $hairComb;
+        $this->description = $description;
     }
 
-    public function getFood()
+    public function getDescription()
     {
-        return $this->food;
+        return $this->description;
     }
 
-    public function getShampoo()
+    public function setDescription($description)
     {
-        return $this->shampoo;
-    }
+        $this->description = $description;
 
-    public function getLeash()
-    {
-        return $this->leash;
-    }
-
-    public function getBed()
-    {
-        return $this->bed;
-    }
-
-    public function getGames()
-    {
-        return $this->hairComb;
+        return $this;
     }
 
     public function getPrice()
     {
-        if ($this->getIsRegistration() == true) {
-            return $this->price * 0.8;
-        }
         return $this->price;
+    }
+    public function setPrice($price)
+    {
+        $this->price = $price;
+    }
+    public function getName()
+    {
+        return $this->name;
+    }
+    public function setName($name)
+    {
+        $this->name = $name;
     }
 }
